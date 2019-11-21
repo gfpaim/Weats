@@ -8,8 +8,10 @@
 </head>
 <body>
 <div id="titulo"><h1>Weats</h1></div>
-<div id="descricao">Descricção</div>
-<div id="botaoLogin"><button id="login">Login</button></div>
+<div id="descricao">Descrição</div>
+<div id="botaoLogin"><a href="login.jsp">
+   <input type="button" value="Login" />
+</a></div>
 
 <div id="footer"><footer>Gabriel Paim e Ibirá José</footer></div>
 </body>
