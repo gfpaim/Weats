@@ -6,7 +6,7 @@ public class Cliente {
 	private int id;
 	private String cnpj;
 	private String cpf;
-	private Usuario usuario;
+	private int usuario;
 	private List<Cotacao> cotacoes;
 
 	public int getId() {
@@ -33,11 +33,11 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public Usuario getUsuario() {
+	public int getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(int usuario) {
 		this.usuario = usuario;
 	}
 

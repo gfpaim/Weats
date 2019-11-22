@@ -42,5 +42,18 @@ public class UsuarioDAO {
 
 		return retorno;
 	}
+	
+	public void cadastrarUsuario(Usuario usuario) {
+		String sql = "INSERT INTO USUARIOS (LOGIN,SENHA) VALUES (?,?)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, usuario.getLogin());
+			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.execute();
+			preparedStatement.close();
+		} catch (SQLException e ) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }
