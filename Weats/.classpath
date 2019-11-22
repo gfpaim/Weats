@@ -19,10 +19,13 @@
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
+			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="hsqldb-2.5.0.jar"/>
+	<classpathentry kind="lib" path="taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="lib" path="taglibs-standard-impl-1.2.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
