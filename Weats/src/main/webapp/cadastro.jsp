@@ -7,6 +7,11 @@
 <title>Weats</title>
 </head>
 <body>
-<form action=""></form>
+<div id="titulo"><h1 align="left">Weats</h1></div>
+<form  action="Cadastro" method="post">
+Login: <input name="login" type="text"> <br> <br>
+Senha: <input name="senha" type="password"> <br> <br>
+<button type="submit">Cadastrar-se</button> <br>
+</form>
 </body>
 </html>

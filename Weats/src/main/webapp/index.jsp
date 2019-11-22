@@ -7,12 +7,13 @@
 <title>Weats</title>
 </head>
 <body>
-<div id="titulo"><h1>Weats</h1></div>
-<div id="descricao">Descrição</div>
-<div id="botaoLogin"><a href="login.jsp">
-   <input type="button" value="Login" />
-</a></div>
-
-<div id="footer"><footer>Gabriel Paim e Ibirá José</footer></div>
+<div id="titulo"><h1 align="left">Weats</h1></div>
+<form  action="Login" method="post">
+Login: <input name="login" type="text"> <br> <br>
+Senha: <input name="senha" type="password"> <br> <br>
+<button type="submit">Entrar</button> <br>
+</form>
+<br>
+<a href="cadastro.jsp">Cadastre-se</a>
 </body>
 </html>
