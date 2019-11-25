@@ -19,7 +19,7 @@ public class UsuarioDAO {
 		Usuario retorno = null;
 
 		try {
-			String sql = "SELECT login,senha FROM usuarios where login=? and senha=?";
+			String sql = "SELECT login,senha,papel FROM usuarios where login=? and senha=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
@@ -30,6 +30,7 @@ public class UsuarioDAO {
 				retorno = new Usuario();
 				retorno.setLogin(resultSet.getString("login"));
 				retorno.setSenha(resultSet.getString("senha"));
+				retorno.setPapel(resultSet.getInt("papel"));
 
 			}
 

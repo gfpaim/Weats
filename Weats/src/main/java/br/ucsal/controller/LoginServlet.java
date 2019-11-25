@@ -31,7 +31,11 @@ public class LoginServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.getSession().setAttribute("usuario", usuario);
-			response.sendRedirect("./Home");
+			if(usuario.getPapel() == 0) {
+				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
+			}else {
+				request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
+			}
 		} else {
 			request.setAttribute("erro", "login ou senha inválidos!");
 			request.getRequestDispatcher("./index.jsp").forward(request, response);

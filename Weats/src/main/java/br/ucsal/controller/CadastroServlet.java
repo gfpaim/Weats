@@ -34,9 +34,9 @@ public class CadastroServlet extends HttpServlet {
 
 		request.getSession().setAttribute("usuario", usuario);
 		if(usuario.getPapel() == 0) {
-			response.sendRedirect("./homeCliente.jsp");
+			request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
 		}else {
-			response.sendRedirect("./homeFornecedor.jsp");
+			request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
 		}
 	
 
