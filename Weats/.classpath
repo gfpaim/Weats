@@ -24,8 +24,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="hsqldb-2.5.0.jar"/>
-	<classpathentry kind="lib" path="taglibs-standard-spec-1.2.5.jar"/>
-	<classpathentry kind="lib" path="taglibs-standard-impl-1.2.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
