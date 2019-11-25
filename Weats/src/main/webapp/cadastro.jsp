@@ -11,6 +11,13 @@
 <form  action="Cadastro" method="post">
 Login: <input name="login" type="text"> <br> <br>
 Senha: <input name="senha" type="password"> <br> <br>
+CNPJ: <input name="cnpj" type="text"> <br> <br>
+ENDEREÇO: <input name="endereco" type="text"> <br> <br>
+PAPEL: <select name="papel">
+<option value="">Selecione</option> 
+<option value="0">Cliente</option> 
+<option value="1">Fornecedor</option> 
+</select>
 <button type="submit">Cadastrar-se</button> <br>
 </form>
 </body>

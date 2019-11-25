@@ -44,11 +44,14 @@ public class UsuarioDAO {
 	}
 	
 	public void cadastrarUsuario(Usuario usuario) {
-		String sql = "INSERT INTO USUARIOS (LOGIN,SENHA) VALUES (?,?)";
+		String sql = "INSERT INTO USUARIOS (LOGIN,SENHA,PAPEL,CNPJ,ENDERECO) VALUES (?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.setInt(3, usuario.getPapel());
+			preparedStatement.setString(4, usuario.getCnpj());
+			preparedStatement.setString(5, usuario.getEndereco());
 			preparedStatement.execute();
 			preparedStatement.close();
 		} catch (SQLException e ) {

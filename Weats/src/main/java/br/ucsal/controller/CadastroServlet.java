@@ -18,16 +18,27 @@ public class CadastroServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		String cnpj = request.getParameter("cnpj");
+		String endereco = request.getParameter("endereco");
+		int papel = Integer.parseInt(request.getParameter("papel"));
 
 		Usuario usuario = new Usuario();
 		usuario.setLogin(login);
 		usuario.setSenha(senha);
+		usuario.setCnpj(cnpj);
+		usuario.setEndereco(endereco);
+		usuario.setPapel(papel);
 
 		UsuarioDAO dao = new UsuarioDAO();
 		dao.cadastrarUsuario(usuario);
 
 		request.getSession().setAttribute("usuario", usuario);
-		response.sendRedirect("./cadastro2.jsp");
+		if(usuario.getPapel() == 0) {
+			response.sendRedirect("./homeCliente.jsp");
+		}else {
+			response.sendRedirect("./homeFornecedor.jsp");
+		}
+	
 
 	}
 
