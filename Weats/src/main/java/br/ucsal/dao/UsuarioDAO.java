@@ -59,5 +59,31 @@ public class UsuarioDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	public Usuario getUsuarioById(int id) {
+		Usuario retorno = null;
+
+		try {
+			String sql = "SELECT USUARIO_ID FROM usuarios where USUARIO_ID =?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,id);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				retorno = new Usuario();
+				retorno.setLogin(resultSet.getString("login"));
+				retorno.setSenha(resultSet.getString("senha"));
+				retorno.setId(resultSet.getInt("USUARIO_ID"));
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return retorno;
+	}
 
 }

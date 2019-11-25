@@ -7,6 +7,12 @@
 <title>Weats</title>
 </head>
 <body>
-
+<form action="./NovaLicitacao" method="post">
+Descrição: <input name="descricao" type="text"> <br> <br>
+Data de inicio: <input name="data_inicio" type="text"> <br> <br>
+Data final: <input name="data_final" type="text"> <br> <br>
+Observações: <input name="obs" type="text"> <br> <br>
+<button type="submit">Confirmar</button>
+</form>
 </body>
 </html>

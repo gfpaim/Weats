@@ -1,12 +1,14 @@
 package br.ucsal.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat; 
 import br.ucsal.model.Licitacao;
 import br.ucsal.util.BancoUtil;
 
@@ -39,13 +41,27 @@ public class ClienteDAO {
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
+		} 
 
 		return licitacoes;
 	}
 
-	public void novaLicitacao(int id) {
-
+	public void novaLicitacao(Licitacao licitacao) {
+		String sql = "INSERT INTO LICITACAO (DESCRICAO,OBSERVACOES,DATA_INICIAL,DATA_FINAL) VALUES (?,?,?,?)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, licitacao.getDescricao());
+			preparedStatement.setString(2, licitacao.getObservacoes());
+			preparedStatement.setDate(3, (Date) new SimpleDateFormat("dd/MM/yyyy").parse(licitacao.getData_inicio()));
+			preparedStatement.setDate(4, (Date) new SimpleDateFormat("dd/MM/yyyy").parse(licitacao.getData_fim()));
+			preparedStatement.execute();
+			preparedStatement.close();
+		} catch (SQLException e ) {
+			throw new RuntimeException(e);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

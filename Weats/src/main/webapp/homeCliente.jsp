@@ -26,6 +26,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<a>Nova Licitação</a>
+	<a href="novaLicitacao.jsp">Nova Licitação</a>
 </body>
 </html>
