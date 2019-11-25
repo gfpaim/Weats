@@ -2,14 +2,31 @@ package br.ucsal.model;
 
 import java.util.List;
 
-public class Cotacao {
+public class Licitacao {
 
 	private int id;
 	private String descricao;
 	private String data_inicio;
 	private String data_fim;
+	private String observacoes;
 	private List<ItemCotacao> itens_cotacao;
-	private Cliente cliente;
+	private Usuario cliente;
+
+	public Usuario getCliente() {
+		return cliente;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
 
 	public int getId() {
 		return id;
@@ -49,14 +66,6 @@ public class Cotacao {
 
 	public void setItens_cotacao(List<ItemCotacao> itens_cotacao) {
 		this.itens_cotacao = itens_cotacao;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 }

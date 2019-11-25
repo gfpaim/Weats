@@ -7,7 +7,7 @@ public class Cliente {
 	private String cnpj;
 	private String cpf;
 	private int usuario;
-	private List<Cotacao> cotacoes;
+	private List<Licitacao> cotacoes;
 
 	public int getId() {
 		return id;
@@ -41,11 +41,11 @@ public class Cliente {
 		this.usuario = usuario;
 	}
 
-	public List<Cotacao> getCotacoes() {
+	public List<Licitacao> getCotacoes() {
 		return cotacoes;
 	}
 
-	public void setCotacoes(List<Cotacao> cotacoes) {
+	public void setCotacoes(List<Licitacao> cotacoes) {
 		this.cotacoes = cotacoes;
 	}
 

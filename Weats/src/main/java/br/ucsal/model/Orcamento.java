@@ -6,7 +6,7 @@ public class Orcamento {
 	private int id;
 	private String descricao;
 	private double valor;
-	private Cotacao cotacao;
+	private Licitacao cotacao;
 	private List<ItemCotacao> intens_cotacao;
 	private String prazo;
 	private String validade;
@@ -36,11 +36,11 @@ public class Orcamento {
 		this.valor = valor;
 	}
 
-	public Cotacao getCotacao() {
+	public Licitacao getCotacao() {
 		return cotacao;
 	}
 
-	public void setCotacao(Cotacao cotacao) {
+	public void setCotacao(Licitacao cotacao) {
 		this.cotacao = cotacao;
 	}
 
