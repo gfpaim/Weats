@@ -22,7 +22,7 @@ public class ClienteDAO {
 	public List<Licitacao> getLicitacoes(int id) {
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		try {
-			String sql = "SELECT descricao,data_inicial,data_final FROM licitacoes where usuario_id=" + id;
+			String sql = "SELECT descricao,data_inicial,data_final FROM licitacao where usuario_id=" + id;
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();

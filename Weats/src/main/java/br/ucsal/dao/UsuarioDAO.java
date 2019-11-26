@@ -19,7 +19,7 @@ public class UsuarioDAO {
 		Usuario retorno = null;
 
 		try {
-			String sql = "SELECT login,senha,papel FROM usuarios where login=? and senha=?";
+			String sql = "SELECT login,senha,papel FROM usuario where login=? and senha=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
@@ -43,10 +43,10 @@ public class UsuarioDAO {
 
 		return retorno;
 	}
-	
-	public int cadastrarUsuario(Usuario usuario) {
-		int retorno = 0;
-		String sql = "INSERT INTO USUARIOS (LOGIN,SENHA,PAPEL,CNPJ,ENDERECO) VALUES (?,?,?,?,?)";
+
+	public void cadastrarUsuario(Usuario usuario) {
+
+		String sql = "INSERT INTO USUARIO (LOGIN,SENHA,PAPEL,CNPJ,ENDERECO) VALUES (?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
@@ -56,15 +56,15 @@ public class UsuarioDAO {
 			preparedStatement.setString(5, usuario.getEndereco());
 			preparedStatement.execute();
 			preparedStatement.close();
-			retorno = getId(usuario);
-		} catch (SQLException e ) {
+
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return retorno;
+
 	}
 
-	private int getId(Usuario usuario) throws SQLException {
-		String sql = "SELECT (USUARIO_ID) FROM USUARIOS WHERE login =?";
+	public int getId(Usuario usuario) throws SQLException {
+		String sql = "SELECT (USUARIO_ID) FROM USUARIO WHERE login =?";
 		int retorno = 0;
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setString(1, usuario.getLogin());
@@ -74,6 +74,5 @@ public class UsuarioDAO {
 		}
 		return retorno;
 	}
-	
 
 }
