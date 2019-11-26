@@ -44,7 +44,8 @@ public class UsuarioDAO {
 		return retorno;
 	}
 	
-	public void cadastrarUsuario(Usuario usuario) {
+	public int cadastrarUsuario(Usuario usuario) {
+		int retorno = 0;
 		String sql = "INSERT INTO USUARIOS (LOGIN,SENHA,PAPEL,CNPJ,ENDERECO) VALUES (?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -55,35 +56,24 @@ public class UsuarioDAO {
 			preparedStatement.setString(5, usuario.getEndereco());
 			preparedStatement.execute();
 			preparedStatement.close();
+			retorno = getId(usuario);
 		} catch (SQLException e ) {
 			throw new RuntimeException(e);
 		}
-	}
-	public Usuario getUsuarioById(int id) {
-		Usuario retorno = null;
-
-		try {
-			String sql = "SELECT USUARIO_ID FROM usuarios where USUARIO_ID =?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1,id);
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			if (resultSet.next()) {
-				retorno = new Usuario();
-				retorno.setLogin(resultSet.getString("login"));
-				retorno.setSenha(resultSet.getString("senha"));
-				retorno.setId(resultSet.getInt("USUARIO_ID"));
-			}
-
-			resultSet.close();
-			preparedStatement.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
 		return retorno;
 	}
+
+	private int getId(Usuario usuario) throws SQLException {
+		String sql = "SELECT (USUARIO_ID) FROM USUARIOS WHERE login =?";
+		int retorno = 0;
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, usuario.getLogin());
+		ResultSet resultSet = preparedStatement.executeQuery();
+		if (resultSet.next()) {
+			retorno = resultSet.getInt("USUARIO_ID");
+		}
+		return retorno;
+	}
+	
 
 }

@@ -24,7 +24,7 @@ public class NovaLicitacaoServlet extends HttpServlet {
 		String dataInicio = request.getParameter("data_inicio");
 		String dataFinal = request.getParameter("data_final");
 		String obs = request.getParameter("obs");
-
+		
 		Licitacao licitacao = new Licitacao();
 		licitacao.setDescricao(descricao);
 		licitacao.setObservacoes(obs);
