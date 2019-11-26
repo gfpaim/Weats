@@ -18,12 +18,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>30 Kg de Picanha Friboi</td>
-				<td>25/11/2019</td>
-				<td>30/11/2019</td>
-				<td>Em aberto</td>
-			</tr>
+			<c:forEach var="i" items="${licitacoes}">
+				<tr>
+					<td>${i.descricao}</td>
+					<td>${i.data_inicio}</td>
+					<td>${i.data_fim}</td>
+					<td>Em aberto</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<a href="novaLicitacao.jsp">Nova Licitação</a>

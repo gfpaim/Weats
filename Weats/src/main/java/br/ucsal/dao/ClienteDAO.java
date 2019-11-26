@@ -30,8 +30,8 @@ public class ClienteDAO {
 			while (resultSet.next()) {
 				Licitacao retorno = new Licitacao();
 				retorno.setDescricao(resultSet.getString("descricao"));
-				retorno.setData_inicio(resultSet.getString("datainicial"));
-				retorno.setData_fim(resultSet.getString("datafinal"));
+				retorno.setData_inicio(resultSet.getString("data_inicial"));
+				retorno.setData_fim(resultSet.getString("data_final"));
 				
 				licitacoes.add(retorno);
 			}
@@ -46,7 +46,9 @@ public class ClienteDAO {
 		return licitacoes;
 	}
 
-	public void novaLicitacao(Licitacao licitacao) {
+	public void novaLicitacao(Licitacao licitacao) { 
+		// falta inserir o usuario_id nesse INSERT INTO !!!!!!!!!!!!!!!!!!!
+		// O date é neste formato '2019-11-28' com as '
 		String sql = "INSERT INTO LICITACAO (DESCRICAO,OBSERVACOES,DATA_INICIAL,DATA_FINAL) VALUES (?,?,?,?)";
 		try {
 			java.util.Date DataInicio = new SimpleDateFormat("dd MMM yyyy").parse(licitacao.getData_inicio());
