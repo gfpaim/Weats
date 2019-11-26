@@ -49,17 +49,20 @@ public class ClienteDAO {
 	public void novaLicitacao(Licitacao licitacao) {
 		String sql = "INSERT INTO LICITACAO (DESCRICAO,OBSERVACOES,DATA_INICIAL,DATA_FINAL) VALUES (?,?,?,?)";
 		try {
+			java.util.Date DataInicio = new SimpleDateFormat("dd MMM yyyy").parse(licitacao.getData_inicio());
+			java.sql.Date sqlDataInicio = new java.sql.Date(DataInicio.getTime());
+			java.util.Date DataFinal = new SimpleDateFormat("dd MMM yyyy").parse(licitacao.getData_fim());
+			java.sql.Date sqlDataFinal = new java.sql.Date(DataFinal.getTime());
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, licitacao.getDescricao());
 			preparedStatement.setString(2, licitacao.getObservacoes());
-			preparedStatement.setDate(3, (Date) new SimpleDateFormat("dd/MM/yyyy").parse(licitacao.getData_inicio()));
-			preparedStatement.setDate(4, (Date) new SimpleDateFormat("dd/MM/yyyy").parse(licitacao.getData_fim()));
+			preparedStatement.setDate(3,sqlDataInicio);
+			preparedStatement.setDate(4, sqlDataFinal);
 			preparedStatement.execute();
 			preparedStatement.close();
 		} catch (SQLException e ) {
 			throw new RuntimeException(e);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
