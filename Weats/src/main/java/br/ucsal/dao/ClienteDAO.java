@@ -31,7 +31,7 @@ public class ClienteDAO {
 				retorno.setDescricao(resultSet.getString("descricao"));
 				retorno.setData_inicio(resultSet.getString("data_inicial"));
 				retorno.setData_fim(resultSet.getString("data_final"));
-				
+				retorno.setId(resultSet.getInt("licitacao_id"));
 				licitacoes.add(retorno);
 			}
 

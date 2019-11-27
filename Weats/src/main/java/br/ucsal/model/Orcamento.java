@@ -6,11 +6,11 @@ public class Orcamento {
 	private int id;
 	private String descricao;
 	private double valor;
-	private Licitacao cotacao;
+	private Licitacao licitacao;
 	private List<ItemCotacao> intens_cotacao;
 	private String prazo;
 	private String validade;
-	private Fornecedor fornecedor;
+	private Usuario fornecedor;
 
 	public int getId() {
 		return id;
@@ -36,12 +36,12 @@ public class Orcamento {
 		this.valor = valor;
 	}
 
-	public Licitacao getCotacao() {
-		return cotacao;
+	public Licitacao getLicitacao() {
+		return licitacao;
 	}
 
-	public void setCotacao(Licitacao cotacao) {
-		this.cotacao = cotacao;
+	public void setLicitacao(Licitacao cotacao) {
+		this.licitacao = cotacao;
 	}
 
 	public List<ItemCotacao> getIntens_cotacao() {
@@ -68,11 +68,11 @@ public class Orcamento {
 		this.validade = validade;
 	}
 
-	public Fornecedor getFornecedor() {
+	public Usuario getFornecedor() {
 		return fornecedor;
 	}
 
-	public void setFornecedor(Fornecedor fornecedor) {
+	public void setFornecedor(Usuario fornecedor) {
 		this.fornecedor = fornecedor;
 	}
 

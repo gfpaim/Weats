@@ -9,6 +9,7 @@
 <body>
 <div id="titulo"><h1 align="left">Weats</h1></div>
 <form  action="Login" method="post">
+${erro} <br>
 Login: <input name="login" type="text"> <br> <br>
 Senha: <input name="senha" type="password"> <br> <br>
 <button type="submit">Entrar</button> <br>

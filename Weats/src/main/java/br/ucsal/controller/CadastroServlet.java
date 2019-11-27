@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ucsal.dao.ClienteDAO;
+import br.ucsal.dao.FornecedorDAO;
 import br.ucsal.dao.UsuarioDAO;
 import br.ucsal.model.Licitacao;
+import br.ucsal.model.Orcamento;
 import br.ucsal.model.Usuario;
 
 @WebServlet("/Cadastro")
@@ -41,7 +43,6 @@ public class CadastroServlet extends HttpServlet {
 			request.getRequestDispatcher("./cadastro.jsp").forward(request, response);;
 		} else {
 			dao.cadastrarUsuario(usuario);
-
 			request.getSession().setAttribute("usuario", usuario);
 			if (usuario.getPapel() == 0) {
 				ClienteDAO clienteDAO = new ClienteDAO();
@@ -51,6 +52,13 @@ public class CadastroServlet extends HttpServlet {
 				request.getSession().setAttribute("licitacoes", licitacoes);
 				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
 			} else {
+				FornecedorDAO fornecedorDAO = new FornecedorDAO();
+				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
+				licitacoes = fornecedorDAO.getLicitacoes();
+				List<Orcamento> orcamentos = new ArrayList<Orcamento>();
+				orcamentos = fornecedorDAO.getOrcamentos(usuario.getId());
+				request.getSession().setAttribute("licitacoes", licitacoes);
+				request.getSession().setAttribute("orcamentos", orcamentos);
 				request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
 			}
 		}
