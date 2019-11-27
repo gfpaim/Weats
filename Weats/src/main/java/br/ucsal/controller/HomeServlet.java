@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ucsal.dao.ClienteDAO;
 import br.ucsal.model.Licitacao;
+import br.ucsal.model.Usuario;
 
 /**
  * Servlet implementation class HomeServlet
@@ -24,8 +25,8 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ClienteDAO dao = new ClienteDAO();
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
-
-		licitacoes = dao.getLicitacoes(0);
+		Usuario cliente = (Usuario) request.getSession().getAttribute("usuario");
+		licitacoes = dao.getLicitacoes(cliente.getId());
 
 		request.setAttribute("licitacoes", licitacoes);
 		request.getRequestDispatcher("./homeCliente.jsp").forward(request, response);

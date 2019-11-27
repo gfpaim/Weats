@@ -45,7 +45,6 @@ public class UsuarioDAO {
 	}
 
 	public void cadastrarUsuario(Usuario usuario) {
-
 		String sql = "INSERT INTO USUARIO (LOGIN,SENHA,PAPEL,CNPJ,ENDERECO) VALUES (?,?,?,?,?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

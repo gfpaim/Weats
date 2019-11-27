@@ -8,7 +8,8 @@
 </head>
 <body>
 	<input name="Usuario" type="hidden" value="${usuario}">
-	<div align="left">${usuario.login}</div>
+	<div>Usuario: ${usuario.login} CNPJ: ${usuario.cnpj}</div>
+	<br><hr><br>
 	<form action="./NovaLicitacao" method="post">
 		Descrição: <input name="descricao" type="text"> <br> <br>
 		Data de inicio: <input name="data_inicio" type="text"> <br>

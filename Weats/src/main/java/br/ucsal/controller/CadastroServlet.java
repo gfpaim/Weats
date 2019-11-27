@@ -30,16 +30,20 @@ public class CadastroServlet extends HttpServlet {
 		usuario.setPapel(papel);
 
 		UsuarioDAO dao = new UsuarioDAO();
-		dao.cadastrarUsuario(usuario);
+		Usuario aut = dao.autenticar(usuario);
+		if (aut==null ||aut.getLogin().equals(usuario.getLogin())) {
+			request.getSession().setAttribute("erro", "Nome de usuario já existe!");
+			request.getRequestDispatcher("./cadastro.jsp").forward(request, response);;
+		} else {
+			dao.cadastrarUsuario(usuario);
 
-		request.getSession().setAttribute("usuario", usuario);
-		if(usuario.getPapel() == 0) {
-			request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
+			request.getSession().setAttribute("usuario", usuario);
+			if (usuario.getPapel() == 0) {
+				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
+			}
 		}
-	
-
 	}
 
 }
