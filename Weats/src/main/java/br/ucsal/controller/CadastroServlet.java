@@ -1,13 +1,18 @@
 package br.ucsal.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ucsal.dao.ClienteDAO;
 import br.ucsal.dao.UsuarioDAO;
+import br.ucsal.model.Licitacao;
 import br.ucsal.model.Usuario;
 
 @WebServlet("/Cadastro")
@@ -39,6 +44,11 @@ public class CadastroServlet extends HttpServlet {
 
 			request.getSession().setAttribute("usuario", usuario);
 			if (usuario.getPapel() == 0) {
+				ClienteDAO clienteDAO = new ClienteDAO();
+				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
+				licitacoes = clienteDAO.getLicitacoes(usuario.getId());
+
+				request.getSession().setAttribute("licitacoes", licitacoes);
 				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);

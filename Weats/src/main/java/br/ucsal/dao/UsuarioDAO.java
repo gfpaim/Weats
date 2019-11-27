@@ -19,7 +19,7 @@ public class UsuarioDAO {
 		Usuario retorno = null;
 
 		try {
-			String sql = "SELECT login,senha,papel FROM usuario where login=? and senha=?";
+			String sql = "SELECT * FROM usuario where login=? and senha=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, usuario.getLogin());
 			preparedStatement.setString(2, usuario.getSenha());
@@ -31,6 +31,9 @@ public class UsuarioDAO {
 				retorno.setLogin(resultSet.getString("login"));
 				retorno.setSenha(resultSet.getString("senha"));
 				retorno.setPapel(resultSet.getInt("papel"));
+				retorno.setId(resultSet.getInt("usuario_id"));
+				retorno.setCnpj(resultSet.getString("cnpj"));
+				retorno.setEndereco(resultSet.getString("endereco"));
 
 			}
 

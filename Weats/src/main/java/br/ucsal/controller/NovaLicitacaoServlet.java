@@ -1,6 +1,8 @@
 package br.ucsal.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,10 +33,18 @@ public class NovaLicitacaoServlet extends HttpServlet {
 		licitacao.setObservacoes(obs);
 		licitacao.setData_inicio(dataInicio);
 		licitacao.setData_fim(dataFinal);
+		
 		Usuario cliente =  (Usuario) request.getSession().getAttribute("usuario");
 		licitacao.setCliente(cliente);
+		
 		ClienteDAO clienteDAO = new ClienteDAO();
 		clienteDAO.novaLicitacao(licitacao);
-		response.sendRedirect("./homeCliente.jsp");
+		
+		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
+		licitacoes = clienteDAO.getLicitacoes(cliente.getId());
+
+		request.getSession().setAttribute("licitacoes", licitacoes);
+		request.getSession().setAttribute("usuario", cliente);
+		request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
 	}
 }

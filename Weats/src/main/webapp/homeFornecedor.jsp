@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core_1_1" prefix="c"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +17,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Boteco do Mário</td>
-				<td>Descrição</td>
-				<td>30/11/2019</td>
-			</tr>
+			<c:forEach var="i" items="${licitacoes}">
+				<tr>
+					<td>${i.cliente.getLogin()}</td>
+					<td>${i.descricao}</td>
+					<td>${i.data_fim}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </body>
