@@ -44,14 +44,14 @@ public class CadastroServlet extends HttpServlet {
 		} else {
 			dao.cadastrarUsuario(usuario);
 			request.getSession().setAttribute("usuario", usuario);
-			if (usuario.getPapel() == 0) {
+			if (usuario.getPapel() == 0) { // Cliente
 				ClienteDAO clienteDAO = new ClienteDAO();
 				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 				licitacoes = clienteDAO.getLicitacoes(usuario.getId());
 
 				request.getSession().setAttribute("licitacoes", licitacoes);
 				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
-			} else {
+			} else { // Fornecedor
 				FornecedorDAO fornecedorDAO = new FornecedorDAO();
 				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 				licitacoes = fornecedorDAO.getLicitacoes();

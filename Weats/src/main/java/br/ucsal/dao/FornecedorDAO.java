@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.ucsal.model.Licitacao;
 import br.ucsal.model.Orcamento;
+import br.ucsal.model.Usuario;
 import br.ucsal.util.BancoUtil;
 
 public class FornecedorDAO {
@@ -60,7 +61,7 @@ public class FornecedorDAO {
 	public List<Licitacao> getLicitacoes() {
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		try {
-			String sql = "SELECT descricao,data_inicial,data_final FROM licitacao";
+			String sql = "SELECT * FROM licitacao";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,6 +72,7 @@ public class FornecedorDAO {
 				retorno.setData_inicio(resultSet.getString("data_inicial"));
 				retorno.setData_fim(resultSet.getString("data_final"));
 				retorno.setId(resultSet.getInt("LICITACAO_ID"));
+				retorno.setCliente(getClienteById(resultSet.getInt("USUARIO_ID")));
 				licitacoes.add(retorno);
 			}
 
@@ -82,6 +84,35 @@ public class FornecedorDAO {
 		} 
 
 		return licitacoes;
+	}
+	
+	public Usuario getClienteById(int id) {
+		Usuario retorno = null;
+
+		try {
+			String sql = "SELECT * FROM usuario where USUARIO_ID=" + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				retorno = new Usuario();
+				retorno.setLogin(resultSet.getString("login"));
+				retorno.setSenha(resultSet.getString("senha"));
+				retorno.setPapel(resultSet.getInt("papel"));
+				retorno.setId(resultSet.getInt("usuario_id"));
+				retorno.setCnpj(resultSet.getString("cnpj"));
+				retorno.setEndereco(resultSet.getString("endereco"));
+
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return retorno;
 	}
 
 
