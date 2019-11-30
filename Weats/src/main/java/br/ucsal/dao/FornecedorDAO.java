@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +22,26 @@ public class FornecedorDAO {
 	}
 	public void novoOrcamento(Orcamento orcamento) {
 		String sql = "INSERT INTO ORCAMENTO (LICITACAO_ID, USUARIO_ID, DESCRICAO, VALOR, PRAZO) VALUES (?,?,?,?,?)";
-		try {
+		try {			
+			java.util.Date prazo = new SimpleDateFormat("dd/MM/yyyy").parse(orcamento.getPrazo());
+			java.sql.Date sqlPrazo = new java.sql.Date(prazo.getTime());
+			
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, orcamento.getLicitacao().getId());
 			preparedStatement.setInt(2, orcamento.getFornecedor().getId());
 			preparedStatement.setString(3, orcamento.getDescricao());
 			preparedStatement.setDouble(4, orcamento.getValor());
-			preparedStatement.setString(5, orcamento.getPrazo());
+			preparedStatement.setDate(5, sqlPrazo);
 			preparedStatement.execute();
 			preparedStatement.close();
-		} catch (SQLException e ) {
+		} catch (SQLException | ParseException e ) {
 			throw new RuntimeException(e);
 		}
 	}
 	public List<Orcamento> getOrcamentos(int id) {
 		List<Orcamento> orcamentos = new ArrayList<Orcamento>();
 		try {
-			String sql = "SELECT DESCRICAO, VALOR, PRAZO FROM ORCAMENTO where usuario_id=" + id;
+			String sql = "SELECT * FROM ORCAMENTO where usuario_id=" + id;
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -113,6 +118,34 @@ public class FornecedorDAO {
 		}
 
 		return retorno;
+	}
+	
+	public Licitacao getLicitacao(int id) {
+		Licitacao licitacao = null;
+		try {
+			String sql = "SELECT * FROM licitacao where LICITACAO_ID=" + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				licitacao = new Licitacao();
+				licitacao.setDescricao(resultSet.getString("descricao"));
+				licitacao.setData_inicio(resultSet.getString("data_inicial"));
+				licitacao.setData_fim(resultSet.getString("data_final"));
+				licitacao.setId(resultSet.getInt("LICITACAO_ID"));
+				licitacao.setCliente(getClienteById(resultSet.getInt("USUARIO_ID")));
+				
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} 
+
+		return licitacao;
 	}
 
 

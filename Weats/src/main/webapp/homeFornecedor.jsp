@@ -20,7 +20,7 @@
 			<c:forEach var="i" items="${licitacoes}">
 				<tr>
 					<td>${i.cliente.getLogin()}</td>
-					<td>${i.descricao}</td>
+					<td><a href="./NovoOrcamento?id=${i.id}">${i.descricao}</a></td>
 					<td>${i.data_fim}</td>
 				</tr>
 			</c:forEach>
