@@ -20,7 +20,7 @@
 		<tbody>
 			<c:forEach var="i" items="${licitacoes}">
 				<tr>
-					<td>${i.descricao}</td>
+					<td><a href="./ListaOrcamentos?id=${i.id}">${i.descricao}</a></td>
 					<td>${i.data_inicio}</td>
 					<td>${i.data_fim}</td>
 					<td>Em aberto</td>

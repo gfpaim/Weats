@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ucsal.model.Licitacao;
+import br.ucsal.model.Orcamento;
+import br.ucsal.model.Usuario;
 import br.ucsal.util.BancoUtil;
 
 public class ClienteDAO {
@@ -21,7 +23,7 @@ public class ClienteDAO {
 	public List<Licitacao> getLicitacoes(int id) {
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		try {
-			String sql = "SELECT descricao,data_inicial,data_final FROM licitacao where usuario_id=" + id;
+			String sql = "SELECT * FROM licitacao where usuario_id=" + id;
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -65,6 +67,89 @@ public class ClienteDAO {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Licitacao getLicitacao(int id) {
+		Licitacao licitacao = null;
+		try {
+			String sql = "SELECT * FROM licitacao where LICITACAO_ID=" + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				licitacao = new Licitacao();
+				licitacao.setDescricao(resultSet.getString("descricao"));
+				licitacao.setData_inicio(resultSet.getString("data_inicial"));
+				licitacao.setData_fim(resultSet.getString("data_final"));
+				licitacao.setId(resultSet.getInt("LICITACAO_ID"));
+				
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} 
+
+		return licitacao;
+	}
+	
+	public List<Orcamento> getOrcamentos(int id) {
+		List<Orcamento> orcamentos = new ArrayList<Orcamento>();
+		try {
+			String sql = "SELECT * FROM orcamento where licitacao_id=" + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Orcamento retorno = new Orcamento();
+				retorno.setDescricao(resultSet.getString("descricao"));
+				retorno.setValor(resultSet.getInt("valor"));
+				retorno.setPrazo(resultSet.getString("prazo"));
+				retorno.setFornecedor(getClienteById(resultSet.getInt("USUARIO_ID")));
+				orcamentos.add(retorno);
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} 
+
+		return orcamentos;
+	}
+	
+	public Usuario getClienteById(int id) {
+		Usuario retorno = null;
+
+		try {
+			String sql = "SELECT * FROM usuario where USUARIO_ID=" + id;
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				retorno = new Usuario();
+				retorno.setLogin(resultSet.getString("login"));
+				retorno.setSenha(resultSet.getString("senha"));
+				retorno.setPapel(resultSet.getInt("papel"));
+				retorno.setId(resultSet.getInt("usuario_id"));
+				retorno.setCnpj(resultSet.getString("cnpj"));
+				retorno.setEndereco(resultSet.getString("endereco"));
+
+			}
+
+			resultSet.close();
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return retorno;
 	}
 
 }
