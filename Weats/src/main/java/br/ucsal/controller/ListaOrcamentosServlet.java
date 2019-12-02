@@ -21,24 +21,26 @@ import br.ucsal.model.Usuario;
 @WebServlet("/ListaOrcamentos")
 public class ListaOrcamentosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String sid = request.getParameter("id");
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Licitacao licitacao = clienteDAO.getLicitacao(Integer.parseInt(sid));
 		List<Orcamento> orcamentos = new ArrayList<Orcamento>();
 		orcamentos = clienteDAO.getOrcamentos(Integer.parseInt(sid));
-		
+
 		Usuario cliente = (Usuario) request.getSession().getAttribute("usuario");
-		
+
 		request.setAttribute("orcamentos", orcamentos);
 		request.getSession().setAttribute("usuario", cliente);
 		request.setAttribute("licitacao", licitacao);
 		request.getRequestDispatcher("listaOrcamentos.jsp").forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
