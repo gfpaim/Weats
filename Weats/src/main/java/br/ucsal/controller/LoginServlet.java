@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (usuario != null) {
 			request.getSession().setAttribute("usuario", usuario);
-			if (usuario.getPapel() == 0) { // Cliente
+			if (usuario.getPapel() == 1) { // Cliente
 				ClienteDAO clienteDAO = new ClienteDAO();
 				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 				licitacoes = clienteDAO.getLicitacoes(usuario.getId());

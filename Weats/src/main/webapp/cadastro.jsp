@@ -22,8 +22,8 @@
 		ENDEREÇO: <input name="endereco" type="text"> <br> <br>
 		PAPEL: <select name="papel" >
 			<option value="">Selecione</option>
-			<option value="0">Cliente</option>
-			<option value="1">Fornecedor</option>
+			<option value="1">Cliente</option>
+			<option value="2">Fornecedor</option>
 		</select>
 		<button type="submit" class="btn btn-primary">Cadastrar-se</button>
 		<br>

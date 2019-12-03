@@ -74,8 +74,8 @@ public class FornecedorDAO {
 			while (resultSet.next()) {
 				Licitacao retorno = new Licitacao();
 				retorno.setDescricao(resultSet.getString("descricao"));
-				retorno.setData_inicio(resultSet.getString("data_inicial"));
-				retorno.setData_fim(resultSet.getString("data_final"));
+				retorno.setData_inicio(resultSet.getString("data_inicio"));
+				retorno.setData_fim(resultSet.getString("data_fim"));
 				retorno.setId(resultSet.getInt("LICITACAO_ID"));
 				retorno.setCliente(getClienteById(resultSet.getInt("USUARIO_ID")));
 				licitacoes.add(retorno);
@@ -131,8 +131,8 @@ public class FornecedorDAO {
 			if (resultSet.next()) {
 				licitacao = new Licitacao();
 				licitacao.setDescricao(resultSet.getString("descricao"));
-				licitacao.setData_inicio(resultSet.getString("data_inicial"));
-				licitacao.setData_fim(resultSet.getString("data_final"));
+				licitacao.setData_inicio(resultSet.getString("data_inicio"));
+				licitacao.setData_fim(resultSet.getString("data_fim"));
 				licitacao.setId(resultSet.getInt("LICITACAO_ID"));
 				licitacao.setCliente(getClienteById(resultSet.getInt("USUARIO_ID")));
 				

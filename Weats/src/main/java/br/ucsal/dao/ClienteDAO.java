@@ -31,8 +31,8 @@ public class ClienteDAO {
 			while (resultSet.next()) {
 				Licitacao retorno = new Licitacao();
 				retorno.setDescricao(resultSet.getString("descricao"));
-				retorno.setData_inicio(resultSet.getString("data_inicial"));
-				retorno.setData_fim(resultSet.getString("data_final"));
+				retorno.setData_inicio(resultSet.getString("data_inicio"));
+				retorno.setData_fim(resultSet.getString("data_fim"));
 				retorno.setId(resultSet.getInt("licitacao_id"));
 				licitacoes.add(retorno);
 			}
@@ -48,7 +48,7 @@ public class ClienteDAO {
 	}
 
 	public void novaLicitacao(Licitacao licitacao) {
-		String sql = "INSERT INTO LICITACAO (DESCRICAO,OBSERVACOES,DATA_INICIAL,DATA_FINAL,USUARIO_ID) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO LICITACAO (DESCRICAO,DATA_INICIO,DATA_FIM,USUARIO_ID) VALUES (?,?,?,?)";
 		try {
 			java.util.Date DataInicio = new SimpleDateFormat("dd/MM/yyyy").parse(licitacao.getData_inicio());
 			java.sql.Date sqlDataInicio = new java.sql.Date(DataInicio.getTime());
@@ -56,10 +56,10 @@ public class ClienteDAO {
 			java.sql.Date sqlDataFinal = new java.sql.Date(DataFinal.getTime());
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, licitacao.getDescricao());
-			preparedStatement.setString(2, licitacao.getObservacoes());
-			preparedStatement.setDate(3,sqlDataInicio);
-			preparedStatement.setDate(4, sqlDataFinal);
-			preparedStatement.setInt(5, licitacao.getCliente().getId());
+//			preparedStatement.setString(2, licitacao.getObservacoes());
+			preparedStatement.setDate(2,sqlDataInicio);
+			preparedStatement.setDate(3, sqlDataFinal);
+			preparedStatement.setInt(4, licitacao.getCliente().getId());
 			preparedStatement.execute();
 			preparedStatement.close();
 		} catch (SQLException e ) {
@@ -80,8 +80,8 @@ public class ClienteDAO {
 			if (resultSet.next()) {
 				licitacao = new Licitacao();
 				licitacao.setDescricao(resultSet.getString("descricao"));
-				licitacao.setData_inicio(resultSet.getString("data_inicial"));
-				licitacao.setData_fim(resultSet.getString("data_final"));
+				licitacao.setData_inicio(resultSet.getString("data_inicio"));
+				licitacao.setData_fim(resultSet.getString("data_fim"));
 				licitacao.setId(resultSet.getInt("LICITACAO_ID"));
 				
 			}

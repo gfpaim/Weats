@@ -9,8 +9,8 @@ public class BancoUtil {
 	
 	static {
 		try {
-			Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/weats", "SA", "");
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/weats", "postgres", "postegresql");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
