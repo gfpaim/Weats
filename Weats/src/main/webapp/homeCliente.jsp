@@ -26,6 +26,8 @@
 					<td>${i.data_inicio}</td>
 					<td>${i.data_fim}</td>
 					<td>Em aberto</td>
+					<td><a href="AlterarLicitacao.jsp?id=${i.id}">Alterar</a></td>
+					<td><a href="./ExcluirLicitacao?id=${i.id}">Excluir</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

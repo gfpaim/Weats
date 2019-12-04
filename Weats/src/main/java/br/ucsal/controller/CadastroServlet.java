@@ -38,7 +38,7 @@ public class CadastroServlet extends HttpServlet {
 
 		UsuarioDAO dao = new UsuarioDAO();
 		Usuario aut = dao.autenticar(usuario);
-		if (aut==null ||aut.getLogin().equals(usuario.getLogin())) {
+		if (aut!=null) {
 			request.getSession().setAttribute("erro", "Nome de usuario já existe!");
 			request.getRequestDispatcher("./cadastro.jsp").forward(request, response);;
 		} else {
@@ -48,7 +48,6 @@ public class CadastroServlet extends HttpServlet {
 				ClienteDAO clienteDAO = new ClienteDAO();
 				List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 				licitacoes = clienteDAO.getLicitacoes(usuario.getId());
-
 				request.getSession().setAttribute("licitacoes", licitacoes);
 				request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
 			} else { // Fornecedor

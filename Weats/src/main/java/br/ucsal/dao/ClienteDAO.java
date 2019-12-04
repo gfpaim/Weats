@@ -1,4 +1,5 @@
 package br.ucsal.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,7 +43,7 @@ public class ClienteDAO {
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} 
+		}
 
 		return licitacoes;
 	}
@@ -57,18 +58,18 @@ public class ClienteDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, licitacao.getDescricao());
 			preparedStatement.setString(2, licitacao.getObservacoes());
-			preparedStatement.setDate(3,sqlDataInicio);
+			preparedStatement.setDate(3, sqlDataInicio);
 			preparedStatement.setDate(4, sqlDataFinal);
 			preparedStatement.setInt(5, licitacao.getCliente().getId());
 			preparedStatement.execute();
 			preparedStatement.close();
-		} catch (SQLException e ) {
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Licitacao getLicitacao(int id) {
 		Licitacao licitacao = null;
 		try {
@@ -83,7 +84,7 @@ public class ClienteDAO {
 				licitacao.setData_inicio(resultSet.getString("data_inicial"));
 				licitacao.setData_fim(resultSet.getString("data_final"));
 				licitacao.setId(resultSet.getInt("LICITACAO_ID"));
-				
+
 			}
 
 			resultSet.close();
@@ -91,11 +92,11 @@ public class ClienteDAO {
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} 
+		}
 
 		return licitacao;
 	}
-	
+
 	public List<Orcamento> getOrcamentos(int id) {
 		List<Orcamento> orcamentos = new ArrayList<Orcamento>();
 		try {
@@ -118,11 +119,11 @@ public class ClienteDAO {
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} 
+		}
 
 		return orcamentos;
 	}
-	
+
 	public Usuario getClienteById(int id) {
 		Usuario retorno = null;
 
@@ -151,5 +152,19 @@ public class ClienteDAO {
 
 		return retorno;
 	}
+
+	public void ExcluirLicitacao(int id) {
+		String sql = "DELETE FROM LICITACAO WHERE LICITACAO.LICITACAO_ID =" + id;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.execute();
+			preparedStatement.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+
+
 
 }
