@@ -38,8 +38,8 @@ public class CadastroServlet extends HttpServlet {
 
 		UsuarioDAO dao = new UsuarioDAO();
 		Usuario aut = dao.autenticar(usuario);
-//		if (aut==null ||aut.getLogin().equals(usuario.getLogin())) {
-//			request.getSession().setAttribute("erro", "Nome de usuario j· existe!");
+//		if (aut!=null) {
+//			request.getSession().setAttribute("erro", "Nome de usuario j√° existe!");
 //			request.getRequestDispatcher("./cadastro.jsp").forward(request, response);;
 //		} else {
 			dao.cadastrarUsuario(usuario);
