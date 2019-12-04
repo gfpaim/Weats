@@ -13,7 +13,7 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Descrição</th>
+				<th>DescriÃ§Ã£o</th>
 				<th>Data Inicial</th>
 				<th>Data Final</th>
 				<th>Status</th>
@@ -26,10 +26,11 @@
 					<td>${i.data_inicio}</td>
 					<td>${i.data_fim}</td>
 					<td>Em aberto</td>
+					<td><a href="./ExcluirLicitacao?id=${i.id}">Excluir</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="novaLicitacao.jsp">Nova Licitação</a>
+	<a href="novaLicitacao.jsp">Nova LicitaÃ§Ã£o</a>
 </body>
 </html>
