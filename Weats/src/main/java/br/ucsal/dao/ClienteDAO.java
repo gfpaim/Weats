@@ -153,8 +153,9 @@ public class ClienteDAO {
 		return retorno;
 	}
 
-	public void ExcluirLicitacao(int id) {
+	public void excluirLicitacao(int id) {
 		String sql = "DELETE FROM LICITACAO WHERE LICITACAO.LICITACAO_ID =" + id;
+		excluirOrcamento(id);
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.execute();
@@ -165,6 +166,19 @@ public class ClienteDAO {
 		}
 	}
 
+	private void excluirOrcamento(int id) {
+		String sql = "DELETE FROM ORCAMENTO USING LICITACAO WHERE ORCAMENTO.LICITACAO_ID = LICITACAO.LICTACAO ID "
+				+ "AND LICITACAO.LICITACAO_ID ="
+				+ id;
 
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.execute();
+			preparedStatement.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
 
 }

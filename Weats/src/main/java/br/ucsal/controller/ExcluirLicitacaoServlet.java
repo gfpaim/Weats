@@ -25,16 +25,16 @@ public class ExcluirLicitacaoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String sId = request.getParameter("id");
-		
+
 		ClienteDAO clienteDAO = new ClienteDAO();
-		clienteDAO.ExcluirLicitacao(Integer.parseInt(sId));
-		
+		clienteDAO.excluirLicitacao(Integer.parseInt(sId));
+
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		licitacoes = clienteDAO.getLicitacoes(usuario.getId());
-		request.getSession().setAttribute("licitacoes", licitacoes);
-		
-		response.sendRedirect("./homeCliente.jsp");
+		request.setAttribute("licitacoes", licitacoes);
+
+		response.sendRedirect("Home");
 	}
 }

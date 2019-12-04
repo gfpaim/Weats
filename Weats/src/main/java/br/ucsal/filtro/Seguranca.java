@@ -17,7 +17,7 @@ import br.ucsal.model.Usuario;
 /**
  * Servlet Filter implementation class Seguranca
  */
-@WebFilter("/Seguranca")
+@WebFilter(urlPatterns = { "/*", "/**", })
 public class Seguranca implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -26,24 +26,26 @@ public class Seguranca implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		Usuario usuario = (Usuario) httpServletRequest.getSession().getAttribute("usuario");
 		if (usuario != null) {
-			if (usuario.getPapel() == 0 || (httpServletRequest.getRequestURI().endsWith("homeCliente.jsp")
+			System.out.println(usuario.getPapel());
+			if (usuario.getPapel() == 0 && (httpServletRequest.getRequestURI().endsWith("Home")
 					|| httpServletRequest.getRequestURI().endsWith("Login")
-					|| httpServletRequest.getRequestURI().endsWith("novaLicitacao.jsp")
+					|| httpServletRequest.getRequestURI().endsWith("CriarLicitacao")
+					|| httpServletRequest.getRequestURI().endsWith("ExcluirLicitacao")
 					|| httpServletRequest.getRequestURI().endsWith("NovaLicitacao")
 					|| httpServletRequest.getRequestURI().endsWith("ListaOrcamentos")
 					|| httpServletRequest.getRequestURI().endsWith("NovaLicitacao"))) { // Cliente
 				chain.doFilter(request, response);
-			} else if (usuario.getPapel() == 1 || httpServletRequest.getRequestURI().endsWith("homeFornecedor.jsp")
+			} else if (usuario.getPapel() == 1 && (httpServletRequest.getRequestURI().endsWith("Home")
 					|| httpServletRequest.getRequestURI().endsWith("Login")
-					|| httpServletRequest.getRequestURI().endsWith("novoOrcamento.jsp")
-					|| httpServletRequest.getRequestURI().endsWith("NovoOrcamento")) {
+					|| httpServletRequest.getRequestURI().endsWith("NovoOrcamento"))) {
 				chain.doFilter(request, response);
+			} else {
+				//
 			}
 		} else {
 
 			if (httpServletRequest.getRequestURI().endsWith("index.jsp")
 					|| httpServletRequest.getRequestURI().endsWith("Login")
-					|| httpServletRequest.getRequestURI().endsWith("cadastro.jsp")
 					|| httpServletRequest.getRequestURI().endsWith("Cadastro")) {
 				chain.doFilter(request, response);
 
@@ -65,4 +67,5 @@ public class Seguranca implements Filter {
 		// TODO Auto-generated method stub
 
 	}
+
 }

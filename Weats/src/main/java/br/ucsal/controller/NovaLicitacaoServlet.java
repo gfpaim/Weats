@@ -43,8 +43,8 @@ public class NovaLicitacaoServlet extends HttpServlet {
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		licitacoes = clienteDAO.getLicitacoes(cliente.getId());
 
-		request.getSession().setAttribute("licitacoes", licitacoes);
+		request.setAttribute("licitacoes", licitacoes);
 		request.getSession().setAttribute("usuario", cliente);
-		request.getRequestDispatcher("homeCliente.jsp").forward(request, response);
+		response.sendRedirect("Home");
 	}
 }

@@ -58,9 +58,9 @@ public class NovoOrcamentoServlet extends HttpServlet {
 		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
 		licitacoes = fornecedorDAO.getLicitacoes();
 		
-		request.getSession().setAttribute("licitacoes", licitacoes);
+		request.setAttribute("licitacoes", licitacoes);
 		request.getSession().setAttribute("usuario", fornecedor);
-		request.getRequestDispatcher("homeFornecedor.jsp").forward(request, response);
+		response.sendRedirect("Home");
 		
 	}
 

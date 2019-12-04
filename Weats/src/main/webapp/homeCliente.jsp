@@ -13,7 +13,7 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>DescriÃ§Ã£o</th>
+				<th>Descrição</th>
 				<th>Data Inicial</th>
 				<th>Data Final</th>
 				<th>Status</th>
@@ -31,6 +31,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="novaLicitacao.jsp">Nova LicitaÃ§Ã£o</a>
+	<a href="./CriarLicitacao">Nova Licitação</a>
 </body>
 </html>
