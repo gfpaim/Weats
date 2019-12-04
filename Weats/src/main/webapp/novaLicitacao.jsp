@@ -18,7 +18,7 @@
 		<br> Data final: <input name="data_final" type="text"> <br>
 		<br> Observações: <input name="obs" type="text"> <br>
 		<br>
-		<button type="submit">Confirmar</button>
+		<button type="submit" class="btn btn-primary">Confirmar</button>
 	</form>
 
 </body>

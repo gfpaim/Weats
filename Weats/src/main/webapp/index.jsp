@@ -14,7 +14,7 @@
 ${erro} <br>
 Login: <input name="login" type="text"> <br> <br>
 Senha: <input name="senha" type="password"> <br> <br>
-<button type="submit">Entrar</button> <br>
+&nbsp;<button type="submit" class="btn btn-primary">Entrar</button> <br>
 </form>
 <br>
 <a href="cadastro.jsp">Cadastre-se</a>

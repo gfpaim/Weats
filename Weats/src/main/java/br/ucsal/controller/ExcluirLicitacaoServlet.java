@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ucsal.dao.ClienteDAO;
 import br.ucsal.model.Licitacao;
+import br.ucsal.model.Usuario;
 
 /**
  * Servlet implementation class ExcluirLicitacaoServlet
@@ -23,13 +24,17 @@ public class ExcluirLicitacaoServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ClienteDAO clienteDAO = new ClienteDAO();
 		String sId = request.getParameter("id");
-		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
-		licitacoes = (List<Licitacao>) request.getSession().getAttribute("licitacoes");
-		licitacoes.remove(Integer.parseInt(sId));
-		request.getSession().setAttribute("licitacoes", licitacoes);
+		
+		ClienteDAO clienteDAO = new ClienteDAO();
 		clienteDAO.ExcluirLicitacao(Integer.parseInt(sId));
+		
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		List<Licitacao> licitacoes = new ArrayList<Licitacao>();
+		licitacoes = clienteDAO.getLicitacoes(usuario.getId());
+		request.getSession().setAttribute("licitacoes", licitacoes);
+		
 		response.sendRedirect("./homeCliente.jsp");
 	}
 }

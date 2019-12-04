@@ -21,7 +21,7 @@ Cliente= ${licitacao.cliente.getLogin()} <br>
 	Valor: <input name="valor" type="text"> <br> <br> 
 	Prazo: <input name="prazo" type="text"> <br> <br> 
 	<br>
-		<button type="submit">Confirmar</button>
+		<button type="submit" class="btn btn-primary">Confirmar</button>
 	</form>
 </body>
 </html>
